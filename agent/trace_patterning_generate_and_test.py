@@ -264,11 +264,15 @@ class AgentStateConstruction:
         # select the inputs to connect to
         candid_feature = np.zeros(self.m + self.n)
         # calculate the probability of choosing based on the direct connections
+        # prob_sum = np.sum(
+        #     np.abs(self.trace_w_mag[1:self.feature_start_index]), axis=0)
         prob_sum = np.sum(
-            np.abs(self.trace_w_mag[1:self.feature_start_index]), axis=0)
+            np.abs(self.w[1:self.feature_start_index]), axis=0)
         if not np.isclose(prob_sum, 0):
+            # prob = (
+            #         np.abs(self.trace_w_mag[1:self.feature_start_index]) / prob_sum)
             prob = (
-                    np.abs(self.trace_w_mag[1:self.feature_start_index]) / prob_sum)
+                    np.abs(self.w[1:self.feature_start_index]) / prob_sum)
             prob = np.squeeze(prob, 1)
             # prob_mask = np.random.uniform(low=0, high=1, size=prob.shape)
             baseline_prob = 1 / prob.shape[0]
